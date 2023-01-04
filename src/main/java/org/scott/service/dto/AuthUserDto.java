@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
  * @author liscott
  * @date 2023/1/4 14:36
  * description  登录用户Dto，属性由前端登录页面的参数而定
+ * 前端发过来的数据传输类，包含用户信息和验证码信息
  */
 @Setter
 @Getter

@@ -1,7 +1,9 @@
-package org.scott.service.dto.impl;
+package org.scott.service.impl;
 
+import org.scott.service.UserService;
 import org.scott.service.dto.JwtUserDto;
 import org.scott.service.dto.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,20 +22,16 @@ import java.util.List;
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    @Autowired
+    UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if(!"admin".equalsIgnoreCase(username)){
-            throw new UsernameNotFoundException("");
-        }
-        UserDto user = new UserDto();
-        user.setEnabled(true);
-        user.setNickName("scott");
-        user.setPassword("$2a$10$.a.DezMXYcnDOKxlL7JKDuRxt9VrZLyJHdjGHklNY6mo3FcTRY/GW");
+        UserDto userDto = userService.findByName(username);
 
         List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList("Admin");
         JwtUserDto jwtUserDto = new JwtUserDto(
-                user,
+                userDto,
                 null,
                 authorities
         );

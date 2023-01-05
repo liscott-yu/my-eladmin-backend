@@ -43,7 +43,6 @@ public class AuthorizationController {
     public ResponseEntity<Object> login(@Validated @RequestBody AuthUserDto authUserDto, HttpServletRequest request) throws Exception {
         // 密码解密
         String dePassword = RsaUtils.decryptByPrivateKey(RsaProperties.privateKey, authUserDto.getPassword());
-
         // 从 redis 中 根据 key 获取 value
         String captchaValue = (String) redisUtils.get(authUserDto.getUuid());
         // 删除 redis 中 保存的 验证码信息

@@ -4,8 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.lang.NonNullApi;
-
 /**
  * project name  my-eladmin-backend-v2
  * filename  SpringContentHoder
@@ -16,7 +14,6 @@ import org.springframework.lang.NonNullApi;
 @Slf4j
 public class SpringContextHolder implements ApplicationContextAware {
     private static ApplicationContext applicationContext = null;
-
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if (SpringContextHolder.applicationContext != null) {
@@ -25,12 +22,8 @@ public class SpringContextHolder implements ApplicationContextAware {
         SpringContextHolder.applicationContext = applicationContext;
     }
 
-
     /**
-     *  根据名，从 静态变量 applicationContext 中获取 Bean, 自动转型 T
-     * @param name name
-     * @param <T> T
-     * @return T
+     * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
      */
     @SuppressWarnings("unchecked")
     public static <T> T getBean(String name) {
@@ -39,10 +32,7 @@ public class SpringContextHolder implements ApplicationContextAware {
     }
 
     /**
-     * 根据 类型，从 静态变量 applicationContext 中获取 Bean, 自动转型 T
-     * @param requiredType T
-     * @param <T> T
-     * @return T
+     * 从静态变量applicationContext中取得Bean, 自动转型为所赋值对象的类型.
      */
     public static <T> T getBean(Class<T> requiredType) {
         assertContextInjected();
@@ -53,7 +43,7 @@ public class SpringContextHolder implements ApplicationContextAware {
      * 检查ApplicationContext不为空.
      */
     private static void assertContextInjected() {
-        if(applicationContext == null){
+        if (applicationContext == null) {
             throw new IllegalStateException("applicaitonContext属性未注入, 请在applicationContext" +
                     ".xml中定义SpringContextHolder或在SpringBoot启动类中注册SpringContextHolder.");
         }

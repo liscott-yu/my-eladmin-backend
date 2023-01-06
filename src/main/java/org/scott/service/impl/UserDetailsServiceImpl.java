@@ -31,6 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList("Admin");
         JwtUserDto jwtUserDto = new JwtUserDto(
+                // userDto 是 UserDetails 中的 属性
                 userDto,
                 null,
                 authorities

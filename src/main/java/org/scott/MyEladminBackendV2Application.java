@@ -14,10 +14,9 @@ public class MyEladminBackendV2Application {
     }
 
     @Bean
-    public SpringContextHolder springContextHolder(){
+    public SpringContextHolder springContextHolder() {
         // 在Spring Boot中注册 SpringContentHolder
         return new SpringContextHolder();
     }
-
 
 }

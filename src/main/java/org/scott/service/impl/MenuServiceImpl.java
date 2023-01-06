@@ -6,7 +6,6 @@ import cn.hutool.core.util.ObjectUtil;
 import org.scott.domain.Menu;
 import org.scott.domain.vo.MenuMetaVo;
 import org.scott.domain.vo.MenuVo;
-import org.scott.domain.vo.*;
 import org.scott.repository.MenuRepository;
 import org.scott.service.MenuService;
 import org.scott.service.RoleService;

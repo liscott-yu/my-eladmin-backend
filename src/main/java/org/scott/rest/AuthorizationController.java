@@ -48,10 +48,10 @@ public class AuthorizationController {
         // 删除 redis 中 保存的 验证码信息
         redisUtils.del(authUserDto.getUuid());
         if(StringUtils.isBlank(captchaValue)) {
-            throw new Exception("验证码为空 或 已过期！");
+            throw new Exception(StringConstant.CODE_EMPTY_OR_EXPIRED);
         }
         if(StringUtils.isBlank(authUserDto.getCode()) || !authUserDto.getCode().equalsIgnoreCase(captchaValue)) {
-            throw new Exception(" 验证码错误！");
+            throw new Exception(StringConstant.CODE_ERROR);
         }
         // 验证码验证通过
         // //认证授权//1、根据用户名和密码构造一个UsernamePasswordAuthenticationToken实例

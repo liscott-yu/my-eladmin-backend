@@ -3,6 +3,7 @@ package org.scott.rest;
 import cn.hutool.core.util.IdUtil;
 import com.wf.captcha.ArithmeticCaptcha;
 import com.wf.captcha.base.Captcha;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.scott.config.RsaProperties;
@@ -11,6 +12,8 @@ import org.scott.service.dto.JwtUserDto;
 import org.scott.stringConstant.StringConstant;
 import org.scott.utils.RedisUtils;
 import org.scott.utils.RsaUtils;
+import org.scott.utils.SecurityUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -38,6 +41,12 @@ import java.util.concurrent.TimeUnit;
 public class AuthorizationController {
     private final RedisUtils redisUtils;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    @ApiOperation("获取当前登录用户信息")
+    @GetMapping(value = "/info")
+    public ResponseEntity<Object> getUserInfo() {
+        return ResponseEntity.ok(SecurityUtils.getCurrentUser());
+    }
 
     @PostMapping(value = "/login")
     public ResponseEntity<Object> login(@Validated @RequestBody AuthUserDto authUserDto, HttpServletRequest request) throws Exception {

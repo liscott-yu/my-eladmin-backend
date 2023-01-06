@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
  * filename  UserRepository
  * @author liscott
  * @date 2023/1/4 17:50
- * description  //<User, Long>前者代表要查哪个表，后者代表id的类型
+ * description  User, Long前者代表要查哪个表，后者代表id的类型
+ * //继承JpaRepository之后，会默认使用SimpleJpaRepository这个实现类作为UserRepository接口的实体bean
+ * //继承JpaSpecificationExecutor是为了实现动态查询
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
@@ -20,4 +22,5 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
      * @return User
      */
     User findByUsername(String username);
+
 }

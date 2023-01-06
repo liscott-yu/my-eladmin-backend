@@ -3,6 +3,7 @@ package org.scott.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -14,10 +15,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * filename  SecurityConfig
  * @author liscott
  * @date 2023/1/4 16:20
- * description  TODO
+ * description //开启了这个，才能在方法上使用权限控制注解
+ * @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     PasswordEncoder getPasswordEncoder(){

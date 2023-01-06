@@ -1,6 +1,7 @@
 package org.scott.service;
 
 import org.scott.service.dto.UserDto;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,4 +19,11 @@ public interface UserService {
      * @return UserDto
      */
     UserDto findByName(String userName);
+
+    /**
+     * 根据分页信息查询所有用户
+     * @param pageable 分页信息
+     * @return Object
+     */
+    Object queryAll(Pageable pageable);
 }

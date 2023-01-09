@@ -1,5 +1,6 @@
 package org.scott.service.impl;
 
+import org.scott.service.DataService;
 import org.scott.service.RoleService;
 import org.scott.service.UserService;
 import org.scott.service.dto.JwtUserDto;
@@ -27,6 +28,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     UserService userService;
     @Autowired
     RoleService roleService;
+    @Autowired
+    DataService dataService;
 
 
     @Override
@@ -37,7 +40,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         JwtUserDto jwtUserDto = new JwtUserDto(
                 // userDto 是 UserDetails 中的 属性
                 userDto,
-                null,
+                //获取当前用户的数据权限，并进行授权
+                dataService.getDeptIds(userDto),
                 //获取当前用户的权限，并进行授权
                 roleService.mapToGrantedAuthorities(userDto)
         );

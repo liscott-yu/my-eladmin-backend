@@ -1,6 +1,8 @@
 package org.scott.utils;
 
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import org.scott.exception.BadRequestException;
 import org.scott.stringConstant.StringConstant;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.List;
 
 /**
  * project name  my-eladmin-backend-v2
@@ -57,4 +61,16 @@ public class SecurityUtils {
 
 //        return new JSONObject(new JSONObject(userDetails).get("user")).get("id", Long.class);
     }
-}
+
+    /**
+     * 获取当前用户的数据权限
+     * @return List
+     */
+    public static List<Long> getCurrentUserDataScope() {
+        // userDetails -> Object -> JSONArray -> ArrayList
+        UserDetails userDetails = getCurrentUser();
+        Object dataScopes = new JSONObject(userDetails).get("dataScopes");
+        JSONArray array = JSONUtil.parseArray(dataScopes);
+        return JSONUtil.toList(array, Long.class);
+    }
+ }

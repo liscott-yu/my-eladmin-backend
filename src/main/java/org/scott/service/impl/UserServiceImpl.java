@@ -1,6 +1,7 @@
 package org.scott.service.impl;
 
 import org.scott.domain.User;
+import org.scott.exception.EntityExistException;
 import org.scott.repository.UserRepository;
 import org.scott.service.UserService;
 import org.scott.service.dto.UserDto;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * project name  my-eladmin-backend-v2
@@ -46,5 +48,20 @@ public class UserServiceImpl implements UserService {
 //            }
 //        }, pageable);
         return PageUtils.toPage(page.map(userMapper::toDto));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void create(User resources) {
+        if(userRepository.findByUsername(resources.getUsername()) != null){
+            throw new EntityExistException(User.class, "username", resources.getUsername());
+        }
+        if (userRepository.findByEmail(resources.getEmail()) != null) {
+            throw new EntityExistException(User.class, "email", resources.getEmail());
+        }
+        if (userRepository.findByPhone(resources.getPhone()) != null) {
+            throw new EntityExistException(User.class, "phone", resources.getPhone());
+        }
+        userRepository.save(resources);
     }
 }

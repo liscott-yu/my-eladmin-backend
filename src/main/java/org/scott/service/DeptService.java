@@ -1,6 +1,8 @@
 package org.scott.service;
 
 import org.scott.domain.Dept;
+import org.scott.service.dto.DeptDto;
+import org.scott.service.dto.DeptQueryCriteria;
 
 import java.util.List;
 import java.util.Set;
@@ -13,6 +15,15 @@ import java.util.Set;
  * description  TODO
  */
 public interface DeptService {
+    /**
+     * 查询所有数据 部门列表
+     * @param criteria 条件
+     * @param isQuery 是否查询
+     * @return 部门列表
+     * @throws Exception exception
+     */
+    List<DeptDto> queryAll(DeptQueryCriteria criteria, Boolean isQuery) throws Exception;
+
     /**
      * 根据PID查询 部门列表
      * @param pid pid

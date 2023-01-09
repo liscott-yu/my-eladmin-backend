@@ -55,6 +55,12 @@ public class PageUtils extends cn.hutool.core.util.PageUtil{
         return map;
     }
 
+    /**
+     * 分页工具
+     * @param object 、
+     * @param totalElements 、
+     * @return 页
+     */
     public static Map<String,Object> toPage(Object object, Object totalElements) {
         Map<String, Object> map = new LinkedHashMap<String, Object>(2) {{
             put("content", object);

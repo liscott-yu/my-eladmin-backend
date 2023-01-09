@@ -1,5 +1,6 @@
 package org.scott.service;
 
+import org.scott.domain.User;
 import org.scott.service.dto.UserDto;
 import org.scott.service.dto.UserQueryCriteria;
 import org.springframework.data.domain.Pageable;
@@ -28,4 +29,10 @@ public interface UserService {
      * @return Object
      */
     Object queryAll(UserQueryCriteria userQueryCriteria, Pageable pageable);
+
+    /**
+     * 新增用户
+     * @param resources 用户
+     */
+    void create(User resources);
 }

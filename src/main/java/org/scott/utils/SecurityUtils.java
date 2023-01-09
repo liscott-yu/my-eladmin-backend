@@ -1,15 +1,18 @@
 package org.scott.utils;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.scott.exception.BadRequestException;
 import org.scott.stringConstant.StringConstant;
+import org.scott.utils.enums.DataScopeEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -72,5 +75,18 @@ public class SecurityUtils {
         Object dataScopes = new JSONObject(userDetails).get("dataScopes");
         JSONArray array = JSONUtil.parseArray(dataScopes);
         return JSONUtil.toList(array, Long.class);
+    }
+
+    /**
+     * 获取数据权限级别
+     * @return 数据权限级别
+     */
+    public static String getDataScopeType() {
+        List<Long> dataScope = getCurrentUserDataScope();
+        ////dataScopes里面的每个数字代表能看到的部门，如果为空，则代表可以看到所有部门数据
+        if(!CollUtil.isEmpty(dataScope)){
+            return "";
+        }
+        return DataScopeEnum.ALL.getValue();
     }
  }

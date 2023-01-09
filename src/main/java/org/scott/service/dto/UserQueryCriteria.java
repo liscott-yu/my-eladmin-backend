@@ -1,6 +1,7 @@
 package org.scott.service.dto;
 
 import lombok.Data;
+import org.scott.annotation.DataPermission;
 import org.scott.annotation.Query;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.util.Set;
  * description  查询条件类，这个类的参数的具体值由前端传过来，如果这个类的属性名跟Pageable重复，则两个字段都会赋予同样的值
  */
 @Data
+@DataPermission(fieldName = "id", joinName = "dept")
 public class UserQueryCriteria implements Serializable {
     @Query(type = Query.Type.GREATER_THAN)
     private Long id;

@@ -17,4 +17,8 @@ public class StringConstant {
     public static final String CODE_EMPTY_OR_EXPIRED  = "验证码为空 或 已过期！";
 
     public static final String CODE_ERROR = " 验证码错误！";
+
+    public static final String DEFAULT_PASSWORD = "123456";
+
+    public static final String MSG_INSUFFICIENT_AUTHORITY = "当前用户权限不足";
 }

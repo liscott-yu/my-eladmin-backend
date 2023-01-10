@@ -55,6 +55,15 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @ApiOperation("修改用户")
+    @PutMapping
+    @PreAuthorize("hasAnyAuthority('user:edit', 'admin')")
+    public ResponseEntity<Object> updateUser(@Validated (User.Update.class) @RequestBody User resources) throws Exception {
+        checkLevel(resources);
+        userService.update(resources);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     /**
      * 如果当前用户的角色级别低于创建用户的角色级别，则抛出权限不足的错误
      * @param resources User

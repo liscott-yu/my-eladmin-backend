@@ -83,7 +83,7 @@ public class QueryHelp {
                         continue;
                     }
                     Join join = null;
-                    // 模糊多字段，username，Email，phone
+                    // 模糊多字段，nickname，Email，phone
                     if (ObjectUtils.isNotEmpty(blurry)) {
                         String[] blurrys = blurry.split(",");
                         ArrayList<Predicate> orPredicate = new ArrayList<>();
@@ -137,6 +137,16 @@ public class QueryHelp {
         return cb.and(list.toArray(new Predicate[0]));
     }
 
+    /**
+     * 对表达式执行类型转换，返回一个新的表达式对象.
+     * 此方法不会导致类型转换:运行时类型不会更改。
+     * @param attributeName 属性名称
+     * @param join 连接条件（left join ...）
+     * @param root 实体类
+     * @param <T> T the type of the expression
+     * @param <R> R root 实体类
+     * @return new expression of the given type
+     */
     private static <T, R> Expression<T> getExpression(String attributeName, Join join, Root<R> root) {
         if(ObjectUtils.isNotEmpty(join)) {
             return join.get(attributeName);

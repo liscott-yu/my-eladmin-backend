@@ -18,7 +18,10 @@ public class StringConstant {
 
     public static final String CODE_ERROR = " 验证码错误！";
 
-    public static final String DEFAULT_PASSWORD = "123456";
+    public static final String DEFAULT_PASSWORD = "$2a$10$Egp1/gvFlt7zhlXVfEFw4OfWQCGPw0ClmMcc6FjTnvXNRVf9zdMRa";
 
     public static final String MSG_INSUFFICIENT_AUTHORITY = "当前用户权限不足";
+
+    public static final String RSA_PUBLIC_KEY = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALpDvk+LhR4dGvmmU5f1LU6KPRpi29LFm5E0cYhWSpHooYtZ5fxiBL9eO5cG3so5wh1cS9R+cWy6zX/JbKaPoekCAwEAAQ==";
+
 }

@@ -35,4 +35,11 @@ public interface UserService {
      * @param resources 用户
      */
     void create(User resources);
+
+    /**
+     * 修改用户
+     * @param resources user
+     * @throws Exception exception
+     */
+    void update(User resources) throws Exception;
 }

@@ -12,7 +12,8 @@ import org.scott.exception.BadRequestException;
  * description  校验工具
  */
 public class ValidationUtils {
-    /** 校验 空
+    /** 校验空，若是空，抛出异常
+     *
      * ValidationUtils.isEmpty(null,entity,param,value)  = true
      * ValidationUtils.isEmpty("",entity,param,value) = true
      * ValidationUtils.isEmpty("ab",entity,param,value) = false

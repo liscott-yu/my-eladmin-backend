@@ -3,7 +3,6 @@ package org.scott.service;
 import org.scott.domain.Dept;
 import org.scott.service.dto.DeptDto;
 import org.scott.service.dto.DeptQueryCriteria;
-
 import java.util.List;
 import java.util.Set;
 
@@ -44,4 +43,5 @@ public interface DeptService {
      * @return List
      */
     List<Long> getDeptChildren(List<Dept> deptList);
+
 }

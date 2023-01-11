@@ -3,6 +3,7 @@ package org.scott.config.jwt;
 import cn.hutool.core.util.StrUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.scott.config.SecurityProperties;
+import org.scott.service.DeptService;
 import org.scott.service.dto.JwtUserDto;
 import org.scott.service.impl.OnlineUserService;
 import org.slf4j.Logger;

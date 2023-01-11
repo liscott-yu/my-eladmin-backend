@@ -4,12 +4,12 @@ import cn.hutool.core.util.IdUtil;
 import com.wf.captcha.ArithmeticCaptcha;
 import com.wf.captcha.base.Captcha;
 import io.swagger.annotations.ApiOperation;
-import jdk.nashorn.internal.parser.Token;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.scott.config.RsaProperties;
 import org.scott.config.SecurityProperties;
 import org.scott.config.jwt.TokenProvider;
+import org.scott.service.DeptService;
 import org.scott.service.dto.AuthUserDto;
 import org.scott.service.dto.JwtUserDto;
 import org.scott.service.impl.OnlineUserService;
@@ -89,6 +89,13 @@ public class AuthorizationController {
            put("user", jwtUserDto);
         }};
         return ResponseEntity.ok(authInfo);
+    }
+
+    @ApiOperation("退出登录")
+    @DeleteMapping(value = "/logout")
+    public ResponseEntity<Object> logout(HttpServletRequest request) {
+        onlineUserService.logout(tokenProvider.getToken(request));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/code")

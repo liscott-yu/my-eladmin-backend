@@ -3,6 +3,7 @@ package org.scott.config;
 import lombok.RequiredArgsConstructor;
 import org.scott.config.jwt.TokenConfigurer;
 import org.scott.config.jwt.TokenProvider;
+import org.scott.service.DeptService;
 import org.scott.service.impl.OnlineUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

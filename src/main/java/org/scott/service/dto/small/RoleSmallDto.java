@@ -2,6 +2,8 @@ package org.scott.service.dto.small;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * project name  my-eladmin-backend-v2
  * filename  RoleSmallDto
@@ -11,7 +13,7 @@ import lombok.Data;
  * description  TODO
  */
 @Data
-public class RoleSmallDto {
+public class RoleSmallDto implements Serializable {
     private Long id;
     private String name;
     /** 权限等级 */

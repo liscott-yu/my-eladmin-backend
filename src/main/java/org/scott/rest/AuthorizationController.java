@@ -4,11 +4,15 @@ import cn.hutool.core.util.IdUtil;
 import com.wf.captcha.ArithmeticCaptcha;
 import com.wf.captcha.base.Captcha;
 import io.swagger.annotations.ApiOperation;
+import jdk.nashorn.internal.parser.Token;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.scott.config.RsaProperties;
+import org.scott.config.SecurityProperties;
+import org.scott.config.jwt.TokenProvider;
 import org.scott.service.dto.AuthUserDto;
 import org.scott.service.dto.JwtUserDto;
+import org.scott.service.impl.OnlineUserService;
 import org.scott.stringConstant.StringConstant;
 import org.scott.utils.RedisUtils;
 import org.scott.utils.RsaUtils;
@@ -41,6 +45,9 @@ import java.util.concurrent.TimeUnit;
 public class AuthorizationController {
     private final RedisUtils redisUtils;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final SecurityProperties properties;
+    private final TokenProvider tokenProvider;
+    private final OnlineUserService onlineUserService;
 
     @ApiOperation("获取当前登录用户信息")
     @GetMapping(value = "/info")
@@ -71,10 +78,14 @@ public class AuthorizationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         //4、通过已经认证的Authentication返回UserDetails
         final JwtUserDto jwtUserDto = (JwtUserDto) authentication.getPrincipal();
+        //  生成 Token
+        String jwt = tokenProvider.createToken(authentication);
+        // 保存在线信息
+        onlineUserService.save(jwtUserDto, jwt, request);
 
         // 返回 JwtUserDto 和 token
         Map<String, Object> authInfo = new HashMap<String, Object>(2) {{
-           put("token", "token");
+           put("token", properties.getTokenStartWith()+ jwt);
            put("user", jwtUserDto);
         }};
         return ResponseEntity.ok(authInfo);

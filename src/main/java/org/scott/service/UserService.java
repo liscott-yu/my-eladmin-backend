@@ -6,6 +6,9 @@ import org.scott.service.dto.UserQueryCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.sql.RowSet;
+import java.util.Set;
+
 /**
  * project name  my-eladmin-backend-v2
  * filename  UserService
@@ -42,4 +45,17 @@ public interface UserService {
      * @throws Exception exception
      */
     void update(User resources) throws Exception;
+
+    /**
+     * 根据 id 查询 UserDto
+     * @param id ID
+     * @return UserDto
+     */
+    UserDto findById(Long id);
+
+    /**
+     * 根据 id集合 删除用户
+     * @param ids id集合
+     */
+    void delete(Set<Long> ids);
 }

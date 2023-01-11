@@ -3,6 +3,8 @@ package org.scott.service.dto.small;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * project name  my-eladmin-backend-v2
  * filename  JobSmallDto
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class JobSmallDto {
+public class JobSmallDto implements Serializable {
     private Long id;
     private String name;
 }

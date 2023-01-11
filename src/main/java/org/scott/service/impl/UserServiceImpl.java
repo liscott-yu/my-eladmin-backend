@@ -19,6 +19,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+import java.util.Set;
+
 /**
  * project name  my-eladmin-backend-v2
  * filename  UserServiceImpl
@@ -105,5 +108,20 @@ public class UserServiceImpl implements UserService {
                 StringConstant.DEFAULT_PASSWORD : resources.getPassword();
         user.setPassword( password );
         userRepository.save(user);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public UserDto findById(Long id) {
+        User user = userRepository.findById(id).orElseGet(User::new);
+        //校验非空
+        ValidationUtils.isNull(user.getId(), "User", "id", id);
+        return userMapper.toDto(user);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Set<Long> ids) {
+        userRepository.deleteAllByIdIn(ids);
     }
 }
